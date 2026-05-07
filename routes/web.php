@@ -1,8 +1,8 @@
-コピーしました！
 <?php
 
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -14,5 +14,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     // タスクの仮ルート（次のセクションで本実装に置き換え）
-    Route::get('/tasks', fn() => 'タスク一覧（準備中）')->name('tasks.index');
+    Route::resource('tasks', TaskController::class);
 });
