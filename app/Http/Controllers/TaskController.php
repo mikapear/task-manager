@@ -81,8 +81,10 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-                // Policyによる認可チェック
-        $this->authorize('update', $task);
+        // 他のユーザーのタスクにはアクセスできない
+        if ($task->user_id !== auth()->id()) {
+            abort(403);
+        }
 
         $task->update($request->validated());
 
